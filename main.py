@@ -10,16 +10,19 @@ class Cell():
     
     def draw(self):
         texture_file = self.colors[self.color_number] + '.png'
-        image = pygame.image.load(texture_file)
-        x = self.x * 100
-        y = self.y * 100
-        screen.blit(image, (x, y))
+        self.image = pygame.image.load(texture_file)
+        self.image = pygame.transform.scale(self.image, (settings.window_width // settings.cells_width, settings.window_height // settings.cells_height))
+
+        x = self.x * self.image.get_width()
+        y = self.y * self.image.get_height()
+        screen.blit(self.image, (x, y))
 
         if mouse_pressed:
-            x = abs(pygame.mouse.get_pos()[0] - self.x * image.get_width() - image.get_width() // 2)
-            y = abs(pygame.mouse.get_pos()[1] - self.y * image.get_height() - image.get_height() // 2)
-            if x < image.get_width() // 2 and y < image.get_height() // 2:
+            x = abs(pygame.mouse.get_pos()[0] - self.x * self.image.get_width() - self.image.get_width() // 2)
+            y = abs(pygame.mouse.get_pos()[1] - self.y * self.image.get_height() - self.image.get_height() // 2)
+            if x < self.image.get_width() // 2 and y < self.image.get_height() // 2:
                 self.change()
+                print(self.color_number)
 
     def change(self):
         if self.color_number != len(self.colors) - 1:
@@ -39,7 +42,7 @@ for y in range(settings.cells_height):
     for x in range(settings.cells_width):
         cells[y].append(Cell(x, y))
 
-size = (settings.cells_width * 100, settings.cells_height * 100)
+size = (settings.window_width, settings.window_height)
 pygame.init()
 screen = pygame.display.set_mode(size)
 
