@@ -1,4 +1,4 @@
-window_width = 700
+window_width = 1000
 window_height = 700
 
 cells_width = 10

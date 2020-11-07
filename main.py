@@ -9,7 +9,7 @@ class Cell():
         self.color_number = 0
     
     def draw(self):
-        texture_file = self.colors[self.color_number] + '.png'
+        texture_file = 'images/' + self.colors[self.color_number] + '.png'
         self.image = pygame.image.load(texture_file)
         self.image = pygame.transform.scale(self.image, (settings.window_width // settings.cells_width, settings.window_height // settings.cells_height))
 
@@ -62,6 +62,6 @@ while not done:
             mouse_pressed = True
 
     update()
-
+    
     pygame.display.flip()
 pygame.quit()
